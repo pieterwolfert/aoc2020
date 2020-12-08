@@ -21,6 +21,8 @@ def checkprogram(instructions):
     step = 0
     acc = 0
     while step not in indices:
+        if step >= len(instructions):
+            return acc, False
         indices.append(step)
         if 'acc' in instructions[step]:
             acc += int(instructions[step][1])
