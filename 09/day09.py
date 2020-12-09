@@ -4,14 +4,8 @@ with open('input.txt') as f:
     numbers = [int(i.strip()) for i in f]
 
 invalid = 0
-
 for i in range(25, len(numbers)-1):
-    previous = [j for j in numbers[i-25:i]]
-    summed = []
-    for j in previous:
-        for y in previous:
-            if j != y:
-                summed.append(j+y)
+    summed = [j + y for j in numbers[i-25:i] for y in numbers[i-25:i] if j != y]
     if numbers[i] not in summed:
         invalid = numbers[i]
 
@@ -24,6 +18,3 @@ while not found:
             print(min(numbers[i:i+sliding_window]) + max(numbers[i:i+sliding_window]))
             found = True
     sliding_window += 1
-        
-
-
