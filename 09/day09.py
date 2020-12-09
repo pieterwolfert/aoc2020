@@ -5,16 +5,15 @@ with open('input.txt') as f:
 
 invalid = 0
 for i in range(25, len(numbers)-1):
-    summed = [j + y for j in numbers[i-25:i] for y in numbers[i-25:i] if j != y]
-    if numbers[i] not in summed:
+    if numbers[i] not in [j + y for j in numbers[i-25:i] for y in numbers[i-25:i] if j != y]:
         invalid = numbers[i]
+        break
 
 sliding_window = 2
 found = False
 while not found:
     for i in range(len(numbers) - (1 + sliding_window)):
-        summed = sum(numbers[i:i+sliding_window])
-        if summed == invalid:
+        if invalid == sum(numbers[i:i+sliding_window]):
             print(min(numbers[i:i+sliding_window]) + max(numbers[i:i+sliding_window]))
             found = True
     sliding_window += 1
